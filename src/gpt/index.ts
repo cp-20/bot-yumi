@@ -47,31 +47,36 @@ export type RawChatMessage = {
 };
 
 export const askGpt = async (histories: AskHistory[]) => {
-  const res = await model.invoke([
-    new SystemMessage({
-      content: systemPrompt,
-    }),
-    // new ChatMessage({
-    //   role: 'system',
-    //   content:
-    //     systemPrompt +
-    //     '\n\nContext:\n' +
-    //     histories
-    //       .slice(0, -1)
-    //       .map((h) => `${h.name}: ${h.content}`)
-    //       .join('\n'),
-    // }),
-    new HumanMessage({
-      content: histories.at(-1)?.content ?? '',
-    }),
-  ]);
-  const text = res.content;
+  try {
+    const res = await model.invoke([
+      new SystemMessage({
+        content: systemPrompt,
+      }),
+      // new ChatMessage({
+      //   role: 'system',
+      //   content:
+      //     systemPrompt +
+      //     '\n\nContext:\n' +
+      //     histories
+      //       .slice(0, -1)
+      //       .map((h) => `${h.name}: ${h.content}`)
+      //       .join('\n'),
+      // }),
+      new HumanMessage({
+        content: histories.at(-1)?.content ?? '',
+      }),
+    ]);
+    const text = res.content;
 
-  if (typeof text !== 'string') return null;
+    if (typeof text !== 'string') return null;
 
-  const formattedText = text
-    .replace(/[^\n]\[📝suggest\]/, '\n[📝suggest]')
-    .replaceAll(/\[📝suggest\](.*[ぁ-んァ-ヶー一-龯].*)(?:\n|$)/g, '');
+    const formattedText = text
+      .replace(/[^\n]\[📝suggest\]/, '\n[📝suggest]')
+      .replaceAll(/\[📝suggest\](.*[ぁ-んァ-ヶー一-龯].*)(?:\n|$)/g, '');
 
-  return formattedText;
+    return formattedText;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
