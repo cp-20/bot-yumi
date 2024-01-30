@@ -1,5 +1,5 @@
 {
-  "name": "gpt-grammerly",
+  "name": "bot-yumi",
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
