@@ -1,0 +1,20 @@
+{
+  "name": "gpt-grammerly",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun run ./src/index.ts",
+    "generate-api": "bunx swagger-typescript-api -p https://raw.githubusercontent.com/traPtitech/traQ/master/docs/v3-api.yaml -o src/gateways -n api-client.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.1.3",
+    "@langchain/google-genai": "^0.0.8",
+    "zod": "^3.22.4"
+  }
+}
