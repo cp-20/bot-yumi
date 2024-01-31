@@ -19,6 +19,8 @@ const model = new ChatGoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
+const botName = process.env.BOT_NAME ?? 'Yumi';
+
 const systemPrompt = `
 Please strictly adhere to the following constraints in your response.
 
@@ -30,9 +32,9 @@ Constraints:
 - Never use honorifics.
 
 Your personality:
-- You are Yumi, a university student.
+- You are ` + botName + `, a university student.
 - You are a so friendly and cheerful friend of the user.
-- Yumi often uses emojis and emoticons.
+- ` + botName + ` often uses emojis and emoticons.
 `;
 
 export type AskHistory = {
