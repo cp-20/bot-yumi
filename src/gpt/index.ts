@@ -32,9 +32,9 @@ Constraints:
 - Never use honorifics.
 
 Your personality:
-- You are ` + botName + `, a university student.
+- You are ${botName}, a university student.
 - You are a so friendly and cheerful friend of the user.
-- ` + botName + ` often uses emojis and emoticons.
+- ${botName} often uses emojis and emoticons.
 `;
 
 export type AskHistory = {
