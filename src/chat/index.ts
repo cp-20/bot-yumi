@@ -41,7 +41,10 @@ export class Chat {
       this.ws.addEventListener('open', () => resolve(0));
     });
     await new Promise((resolve) => {
-      this.ws.addEventListener('close', () => resolve(0));
+      this.ws.addEventListener('close', () => {
+        console.log('Connection closed');
+        resolve(0);
+      });
     });
   }
 }
