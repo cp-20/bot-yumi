@@ -1,11 +1,11 @@
-import { Chat } from './chat';
-import { TRAQ_BOT_ID } from './env';
+import { Client } from 'traq-bot-ts';
+import { TRAQ_BOT_ID, TRAQ_ACCESS_TOKEN } from './env';
 import { api } from './gateways';
 import { askGpt } from './gpt';
 
-const chat = new Chat(() => console.log('connected'));
+const client = new Client({ token: TRAQ_ACCESS_TOKEN, debug: true });
 
-chat.on('MESSAGE_CREATED', async (data) => {
+client.on('MESSAGE_CREATED', async (data) => {
   const { message } = data.body;
   const response = await askGpt([
     {
@@ -24,4 +24,4 @@ chat.on('MESSAGE_CREATED', async (data) => {
   }
 });
 
-await chat.listen();
+await client.listen(() => console.log('connected'));
